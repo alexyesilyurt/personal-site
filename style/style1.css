@@ -45,10 +45,9 @@ a {
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 a:hover {
-    box-shadow: inset 1000px 0 0 0 #ffffff;
+    box-shadow: inset 250px 0 0 0 #ffffff;
     color: rgb(9, 75, 168);
 }
-
 .bold  {
     font-weight:bold;
 }
