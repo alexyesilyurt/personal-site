@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Personal website for Alexander Yesilyurt, focused on software engineering, trading systems, and technical projects."
+    />
+    <title>Alexander Yesilyurt</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Alexander Yesilyurt home">
+        <span class="brand-mark">AY</span>
+        <span>Alexander Yesilyurt</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#systems">Systems</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="assets/hero-tech-workspace.png"
+          alt="A technical workspace with code and market data dashboards on a laptop."
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Software engineering / quantitative systems / applied ML</p>
+          <h1 id="hero-title">Alexander Yesilyurt</h1>
+          <p class="hero-copy">
+            I build fast, technical systems around markets, data, and decision-making.
+            This site is the working archive for projects, research notes, and the
+            systems I am learning in public.
+          </p>
+          <div class="hero-actions" aria-label="Primary actions">
+            <a class="button primary" href="#work">View projects</a>
+            <a class="button secondary" href="mailto:yesilyurtalexander@gmail.com">Email me</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section intro" aria-label="Snapshot">
+        <div>
+          <p class="section-kicker">Current focus</p>
+          <h2>Engineering useful things where performance matters.</h2>
+        </div>
+        <div class="intro-grid">
+          <article>
+            <span class="metric">01</span>
+            <h3>Trading systems</h3>
+            <p>Market making, order books, simulation, and strategy infrastructure.</p>
+          </article>
+          <article>
+            <span class="metric">02</span>
+            <h3>Data products</h3>
+            <p>News sentiment, price prediction, modeling workflows, and clean dashboards.</p>
+          </article>
+          <article>
+            <span class="metric">03</span>
+            <h3>Technical writing</h3>
+            <p>Writeups that explain decisions, experiments, and what changed after testing.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="work" class="section" aria-labelledby="work-title">
+        <div class="section-heading">
+          <p class="section-kicker">Selected work</p>
+          <h2 id="work-title">Projects to replace with live links as the repo grows.</h2>
+        </div>
+        <div class="project-list">
+          <a class="project-card" href="#" aria-label="High-frequency order book project placeholder">
+            <span class="project-index">001</span>
+            <div>
+              <h3>High-frequency order book</h3>
+              <p>Low-latency market data structures, matching logic, and execution simulation.</p>
+            </div>
+            <span class="project-tag">C++ / systems</span>
+          </a>
+          <a class="project-card" href="#" aria-label="Market making project placeholder">
+            <span class="project-index">002</span>
+            <div>
+              <h3>Market making research</h3>
+              <p>Strategy experiments, risk controls, and notes from trading competitions.</p>
+            </div>
+            <span class="project-tag">Python / quant</span>
+          </a>
+          <a class="project-card" href="#" aria-label="Sentiment analysis project placeholder">
+            <span class="project-index">003</span>
+            <div>
+              <h3>Sentiment news analysis</h3>
+              <p>Pipeline for turning financial text into signals and model-ready features.</p>
+            </div>
+            <span class="project-tag">ML / data</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="systems" class="section systems" aria-labelledby="systems-title">
+        <div class="section-heading">
+          <p class="section-kicker">Operating system</p>
+          <h2 id="systems-title">How I want this site to evolve.</h2>
+        </div>
+        <div class="timeline">
+          <article>
+            <span>Now</span>
+            <h3>Ship the first version</h3>
+            <p>Make the site public, add real links, and write concise project summaries.</p>
+          </article>
+          <article>
+            <span>Next</span>
+            <h3>Add proof</h3>
+            <p>Replace placeholders with screenshots, benchmarks, writeups, and demos.</p>
+          </article>
+          <article>
+            <span>Later</span>
+            <h3>Use it as a lab notebook</h3>
+            <p>Publish short technical notes so the site compounds instead of staying static.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact" aria-labelledby="contact-title">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2 id="contact-title">Open to technical conversations and ambitious projects.</h2>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:yesilyurtalexander@gmail.com">Email</a>
+          <a href="https://github.com/alexyesilyurt">GitHub</a>
+          <a href="https://www.linkedin.com/in/alexanderyesilyurt/">LinkedIn</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built by Alexander Yesilyurt.</span>
+      <span id="local-time" aria-live="polite"></span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
