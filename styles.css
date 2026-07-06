@@ -6,7 +6,7 @@
   --faint: #697381;
   --line: rgba(242, 244, 248, 0.13);
   --line-strong: rgba(242, 244, 248, 0.22);
-  --accent: #7dd3fc;
+  --accent: #ffffff;
   font-family:
     ui-sans-serif,
     system-ui,
@@ -58,7 +58,7 @@ main {
 .section-kicker,
 .project-index,
 .project-tag,
-.signal-row {
+.profile-links {
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -83,7 +83,7 @@ main {
 }
 
 .nav-links a,
-.contact-links a,
+.profile-links a,
 .project-card {
   transition:
     border-color 160ms ease,
@@ -93,7 +93,7 @@ main {
 }
 
 .nav-links a:hover,
-.contact-links a:hover strong {
+.profile-links a:hover {
   color: var(--accent);
 }
 
@@ -154,7 +154,7 @@ h3 {
   line-height: 1.5;
 }
 
-.signal-row {
+.profile-links {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -162,11 +162,16 @@ h3 {
   font-size: 12px;
 }
 
-.signal-row span {
-  padding: 7px 9px;
+.profile-links a {
+  padding: 8px 10px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.025);
+}
+
+.profile-links a:hover {
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.055);
 }
 
 .section {
@@ -202,13 +207,16 @@ h3 {
   transform: translateX(3px);
 }
 
+.muted-card {
+  opacity: 0.72;
+}
+
 .project-card h3,
 .project-card p {
   margin-bottom: 4px;
 }
 
-.project-card p,
-.notes-grid p {
+.project-card p {
   color: var(--muted);
   line-height: 1.6;
 }
@@ -223,55 +231,6 @@ h3 {
 
 .project-tag {
   text-align: right;
-}
-
-.notes-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.notes-grid article {
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-
-.contact {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.7fr);
-  align-items: start;
-  gap: 44px;
-  padding-bottom: 96px;
-}
-
-.contact-links {
-  display: grid;
-  gap: 10px;
-}
-
-.contact-links a {
-  display: grid;
-  grid-template-columns: 82px minmax(0, 1fr);
-  gap: 14px;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-}
-
-.contact-links a:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.contact-links span {
-  color: var(--faint);
-  font-size: 13px;
-}
-
-.contact-links strong {
-  min-width: 0;
-  color: var(--text);
-  font-size: 14px;
-  font-weight: 600;
-  overflow-wrap: anywhere;
 }
 
 @media (max-width: 760px) {
@@ -289,13 +248,8 @@ h3 {
     padding: 58px 0 74px;
   }
 
-  .project-card,
-  .contact,
-  .contact-links a {
-    grid-template-columns: 1fr;
-  }
-
   .project-card {
+    grid-template-columns: 1fr;
     gap: 8px;
   }
 
@@ -303,7 +257,4 @@ h3 {
     text-align: left;
   }
 
-  .notes-grid {
-    grid-template-columns: 1fr;
-  }
 }
