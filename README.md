@@ -17,7 +17,7 @@ Then visit `http://localhost:5173`.
 - Replace project placeholders in `index.html` with real repository links.
 - Add screenshots, demos, or writeups for the strongest projects.
 - Update social links if the current GitHub or LinkedIn URLs change.
-- Buy a domain once the first version is ready. The cleanest target is usually `alexanderyesilyurt.com`.
+- Buy a domain once the first version is ready. The strongest target for this version is `alexyesilyurt.dev`.
 
 ## Hosting recommendation
 
@@ -51,3 +51,17 @@ Good alternatives:
 
 - Vercel: good if you later convert this to Next.js or want preview deployments.
 - Netlify: good if you want simple drag-and-drop deploys, forms, or branch previews.
+
+## Domain plan: alexyesilyurt.dev
+
+`.dev` domains are built for developer projects and require HTTPS. That is a good fit for a technical personal site, but it means the final host must provide SSL certificates.
+
+Recommended path:
+
+1. Search `alexyesilyurt.dev` at Porkbun, Cloudflare Registrar, Namecheap, or another registrar.
+2. Buy it if available. Enable WHOIS privacy and auto-renew.
+3. Deploy the site on GitHub Pages, Vercel, Netlify, or Cloudflare Pages.
+4. Add the custom domain in the host dashboard.
+5. Point DNS records from the registrar to the host.
+
+As of July 6, 2026, the Google Registry RDAP lookup returned `404 Not Found` for `alexyesilyurt.dev`, which suggests the domain is not currently registered. The registrar checkout page is still the source of truth before purchase.
