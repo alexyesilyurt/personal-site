@@ -65,7 +65,8 @@ body.has-pointer-glow .cursor-glow {
 }
 
 .site-header,
-main {
+main,
+.site-footer {
   position: relative;
   z-index: 1;
   width: min(980px, calc(100% - 40px));
@@ -79,13 +80,31 @@ main {
   padding: 28px 0;
 }
 
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 0 34px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .brand,
 .nav-links,
 .eyebrow,
 .section-kicker,
 .project-index,
 .project-tag,
-.profile-links {
+.profile-links,
+.site-footer,
+.footer-links {
   font-family:
     ui-monospace,
     SFMono-Regular,
@@ -110,6 +129,7 @@ main {
 }
 
 .nav-links a,
+.footer-links a,
 .profile-links a,
 .project-card {
   transition:
@@ -120,6 +140,7 @@ main {
 }
 
 .nav-links a:hover,
+.footer-links a:hover,
 .profile-links a:hover {
   color: var(--accent);
 }
@@ -232,6 +253,10 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.experience-card {
+  grid-template-columns: 42px minmax(0, 1fr);
+}
+
 .project-card:last-child {
   border-bottom: 1px solid var(--line);
 }
@@ -274,7 +299,8 @@ h3 {
 
 @media (max-width: 760px) {
   .site-header,
-  main {
+  main,
+  .site-footer {
     width: min(100% - 28px, 980px);
   }
 
@@ -294,6 +320,12 @@ h3 {
 
   .project-tag {
     text-align: left;
+  }
+
+  .site-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
   }
 
 }
