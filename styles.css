@@ -152,14 +152,41 @@ main,
 }
 
 .hero {
-  min-height: 64vh;
+  min-height: 60vh;
   display: grid;
   align-items: center;
-  padding: 74px 0 88px;
+  padding: 64px 0 76px;
 }
 
 .hero-content {
-  width: min(780px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 34%);
+  align-items: center;
+  gap: clamp(28px, 5vw, 62px);
+  width: 100%;
+}
+
+.hero-copy-block {
+  min-width: 0;
+  max-width: 720px;
+}
+
+.hero-portrait {
+  justify-self: end;
+  width: min(100%, 330px);
+  margin: 0;
+}
+
+.hero-portrait img {
+  display: block;
+  width: 100%;
+  max-height: min(440px, 54vh);
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 42%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  filter: grayscale(10%);
 }
 
 .eyebrow,
@@ -357,6 +384,19 @@ h3 {
   .hero {
     min-height: auto;
     padding: 58px 0 74px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-portrait {
+    justify-self: start;
+    width: min(100%, 320px);
+  }
+
+  .hero-portrait img {
+    max-height: 420px;
   }
 
   .project-card {
