@@ -282,6 +282,14 @@ h3 {
 
 .title-link {
   color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.42);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.title-link:hover {
+  text-decoration-color: rgba(255, 255, 255, 0.82);
 }
 
 .project-card p {
