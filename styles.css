@@ -160,9 +160,9 @@ main,
 
 .hero-content {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(190px, 24vw, 260px);
+  grid-template-columns: minmax(0, 1fr) clamp(150px, 19vw, 215px);
   align-items: center;
-  gap: clamp(24px, 4vw, 48px);
+  gap: clamp(18px, 3.4vw, 40px);
   width: 100%;
 }
 
@@ -180,7 +180,7 @@ main,
 .hero-portrait img {
   display: block;
   width: 100%;
-  max-height: 330px;
+  max-height: 285px;
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: 50% 42%;
@@ -407,18 +407,18 @@ h3 {
 
 }
 
-@media (max-width: 680px) {
+@media (max-width: 540px) {
   .hero-content {
     grid-template-columns: 1fr;
   }
 
   .hero-portrait {
     justify-self: start;
-    width: min(100%, 260px);
+    width: min(100%, 220px);
   }
 
   .hero-portrait img {
-    max-height: 340px;
+    max-height: 295px;
   }
 }
 
