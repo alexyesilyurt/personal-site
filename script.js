@@ -35,12 +35,17 @@ if (supportsFinePointer && !prefersReducedMotion) {
 
 document.querySelectorAll(".flip-card").forEach((card) => {
   card.addEventListener("click", () => {
-    card.classList.toggle("is-flipped");
+    const isFlipped = card.classList.toggle("is-flipped");
+    card.classList.toggle("suppress-hover", !isFlipped);
   });
 
   card.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" && event.key !== " ") return;
     event.preventDefault();
     card.classList.toggle("is-flipped");
+  });
+
+  card.addEventListener("pointerleave", () => {
+    card.classList.remove("suppress-hover");
   });
 });

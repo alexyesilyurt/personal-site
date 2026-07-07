@@ -366,10 +366,14 @@ h3 {
   transition: transform 520ms ease;
 }
 
-.flip-card:hover .flip-card-inner,
-.flip-card:focus .flip-card-inner,
+.flip-card:not(.suppress-hover):hover .flip-card-inner,
 .flip-card.is-flipped .flip-card-inner {
   transform: rotateY(180deg);
+}
+
+.flip-card:focus-visible {
+  outline: 1px solid var(--line-strong);
+  outline-offset: 4px;
 }
 
 .flip-card-face {
