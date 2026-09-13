@@ -57,7 +57,7 @@ h1.name{font-family:var(--display); font-weight:700; font-size:clamp(38px,7.5vw,
 .skip{margin-top:26px; font-family:var(--mono); font-size:11px; color:var(--faint); letter-spacing:.1em;
   text-transform:uppercase; background:none; border:0; cursor:pointer; border-bottom:1px solid transparent; padding:2px 0}
 .skip:hover{color:var(--muted); border-bottom-color:var(--line-2)}
-.drop-well{position:relative; width:calc(var(--dc)*10); height:calc(var(--dc)*12);
+.drop-well{position:relative; box-sizing:content-box; width:calc(var(--dc)*10); height:calc(var(--dc)*12);
   --dc:clamp(17px,3.1vmin,30px); overflow:hidden;
   background:linear-gradient(90deg,var(--grid) 1px,transparent 1px),
              linear-gradient(180deg,var(--grid) 1px,transparent 1px), var(--well);
@@ -120,7 +120,7 @@ h1.name{font-family:var(--display); font-weight:700; font-size:clamp(38px,7.5vw,
 /* the board itself */
 .stage-wrap{display:flex; flex-direction:column; align-items:center; gap:14px}
 .board{
-  position:relative; width:calc(var(--bc)*10); height:calc(var(--bc)*12);
+  position:relative; box-sizing:content-box; width:calc(var(--bc)*10); height:calc(var(--bc)*12);
   background:linear-gradient(90deg,var(--grid) 1px,transparent 1px),
              linear-gradient(180deg,var(--grid) 1px,transparent 1px), var(--well);
   background-size:var(--bc) var(--bc);
