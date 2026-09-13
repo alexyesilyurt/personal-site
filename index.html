@@ -5,370 +5,337 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Personal website for Alex Yesilyurt, focused on software engineering, trading systems, and technical projects."
+      content="Alex Yesilyurt — junior at the University of Michigan studying Computer Science and Economics with a minor in Mathematics. Trading systems, ML research, and AI infrastructure."
     />
     <title>Alex Yesilyurt</title>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css?v=20260728-1" />
-    <script src="script.js?v=20260728-1" defer></script>
+    <link rel="icon" href="favicon.svg?v=f49eda46" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css?v=7b18d109" />
+    <script src="script.js?v=8e60c99f" defer></script>
   </head>
   <body>
-    <div class="cursor-glow" aria-hidden="true"></div>
-    <header class="site-header" aria-label="Primary navigation">
-      <a class="brand" href="#top" aria-label="Alex Yesilyurt home">
-        alexyesilyurt
-      </a>
-      <nav class="nav-links">
-        <a href="#experience">Experience</a>
-        <a href="#competitions">Competitions</a>
-        <a href="#projects">Projects</a>
-        <a href="#programs">Programs</a>
-        <a href="#outside">Outside</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+    <!-- ============ BOOT ============ -->
+    <div id="boot" class="live">
+      <canvas id="ambient"></canvas>
+      <div class="stage on" data-stage="load">
+        <div class="load-label">LOADING</div>
+        <div class="load-bar" id="loadBar"></div>
+        <div class="load-pct" id="loadPct">0%</div>
+      </div>
+      <div class="stage" data-stage="title">
+        <div class="title-mark" id="titleMark"></div>
+        <h1 class="name">ALEX<br>YESILYURT</h1>
+        <p class="title-sub">CS + Economics + Mathematics &middot; <b>Michigan</b></p>
+        <button class="press" id="playBtn"><span class="caret">&#9654;</span> PRESS START</button>
+        <button class="skip" id="skipBtn">skip intro</button>
+      </div>
+      <div class="stage" data-stage="drop">
+        <div class="drop-well" id="dropWell"><div class="tetris-call" id="call">TETRIS</div></div>
+        <div class="drop-cap" id="dropCap"></div>
+      </div>
+    </div>
 
-    <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-content">
-          <div class="hero-copy-block">
-            <h1 id="hero-title">Alex Yesilyurt</h1>
-            <p class="welcome">Welcome to my page!</p>
-            <p class="hero-copy">
-              I'm a junior at the University of Michigan studying Computer Science
-              and Economics with a minor in Mathematics. I'm passionate about
-              markets, trading, and AI. In my free time, I like playing Tetris,
-              going on hikes, and traveling.
-            </p>
-            <div id="contact" class="profile-links" aria-label="Profile links">
-              <a href="https://www.linkedin.com/in/alexyesilyurt/">LinkedIn</a>
-              <a href="https://github.com/alexyesilyurt">GitHub</a>
-              <a href="mailto:alexyes@umich.edu">Email</a>
+    <!-- ============ ARCADE ============ -->
+    <div id="arcade">
+      <aside class="rail rail-hold">
+        <div class="box">
+          <div class="box-h">HOLD</div>
+          <div class="box-b">
+            <div class="hold-name">Alex Yesilyurt</div>
+            <div class="hold-role">Junior &middot; University of Michigan<br>CS + Econ + Mathematics</div>
+            <div class="hold-links">
+              <a href="https://www.linkedin.com/in/alexyesilyurt/">LinkedIn <span>&#8599;</span></a>
+              <a href="https://github.com/alexyesilyurt">GitHub <span>&#8599;</span></a>
+              <a href="mailto:alexyes@umich.edu">Email <span>&#8599;</span></a>
             </div>
           </div>
-          <figure class="hero-portrait">
-            <img src="assets/profile-alex.jpg?v=20260728-1" alt="Alex Yesilyurt standing by the ocean." />
-          </figure>
+        </div>
+      </aside>
+
+      <div class="stage-wrap">
+        <p class="mwho">ALEX YESILYURT &middot; CS + ECON @ MICHIGAN</p>
+        <div class="hud-top">
+          <span>LINES <b id="aLines">0</b>/7</span>
+          <span>SCORE <b id="aScore">0</b></span>
+        </div>
+        <div class="board" id="board">
+          <div id="ghost" style="opacity:0"></div>
+          <div id="cursor"><i style="top:0"></i><i style="top:var(--bc)"></i>
+            <i style="top:calc(var(--bc)*2)"></i><i style="top:calc(var(--bc)*3)"></i></div>
+        </div>
+        <p class="hint"><kbd>&#8593;</kbd><kbd>&#8595;</kbd> choose &nbsp; <kbd>space</kbd> drop to open
+          &nbsp; <kbd>T</kbd> play tetris &nbsp; or just click a row</p>
+        <p class="hint hint-touch">tap a row to open it</p>
+        <div class="mbar">
+          <button class="mini-btn hot" id="mPlay">&#9654; TETRIS</button>
+          <button class="mini-btn" id="mPlain">PLAIN VIEW</button>
+          <button class="mini-btn" id="mReset">RESET</button>
+        </div>
+      </div>
+
+      <aside class="rail">
+        <div class="box"><div class="box-h">NEXT</div><nav class="q" id="queue"></nav></div>
+        <div class="box"><div class="box-h">STATS</div><div class="box-b">
+          <div class="stat"><i>CLEARED</i><b id="sCleared">0/7</b></div>
+          <div class="stat"><i>SCORE</i><b id="sScore">0</b></div>
+          <div class="stat"><i>LEVEL</i><b id="sLevel">01</b></div>
+        </div></div>
+        <div class="box"><div class="box-b" style="display:flex;flex-direction:column;gap:7px">
+          <button class="mini-btn hot" id="openGame">&#9654; PLAY TETRIS</button>
+          <button class="mini-btn" id="toPlain">PLAIN VIEW</button>
+          <button class="mini-btn" id="resetBoard">RESET BOARD</button>
+        </div></div>
+      </aside>
+    </div>
+
+    <!-- ============ SECTION PANEL ============ -->
+    <div id="panel">
+      <div class="p-inner">
+        <header class="p-head">
+          <span class="pc" id="pPiece"></span>
+          <h3 id="pTitle">SECTION</h3>
+          <span class="pts" id="pPts">+800</span>
+          <button class="p-close" id="pClose">ESC &times; BACK</button>
+        </header>
+        <div class="p-body" id="pBody"></div>
+      </div>
+    </div>
+
+    <!-- ============ PLAIN DOCUMENT (source of truth + no-JS fallback) ============ -->
+    <main id="doc">
+      <div class="doc-bar">
+        <span class="who">alexyesilyurt.dev</span>
+        <button class="linkish" id="toArcade">&#9654; enter the well</button>
+      </div>
+
+      <section class="doc-hero">
+        <h2>I like <em>solving problems</em>.</h2>
+        <p>Junior at the University of Michigan studying Computer Science and Economics with a
+           minor in Mathematics.</p>
+      </section>
+
+      <section class="sec" id="experience" data-piece="I" data-label="EXPERIENCE" data-tally="6 LINES" style="--c:var(--I)">
+        <div class="sec-h"><span class="pc" data-piece="I"></span><h3>EXPERIENCE</h3><span class="fill"></span><span class="n">6 LINES</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">01</span><div>
+              <h4>AI Engineering Intern</h4><p class="meta">Octave</p>
+              <p class="d">Build ML systems for engineering simulations and production workflows.</p></div>
+              <span class="tag">May 2026 &mdash; Present</span></article>
+            <article class="row"><span class="idx">02</span><div>
+              <h4>Researcher</h4><p class="meta">U-Michigan, Dept. of Statistics</p>
+              <p class="d">Researched personalized LLM alignment methods for modeling user preferences at scale.</p></div>
+              <span class="tag">May 2025 &mdash; May 2026</span></article>
+            <article class="row"><span class="idx">03</span><div>
+              <h4>Trading Support Intern</h4><p class="meta">Cantor Fitzgerald</p>
+              <p class="d">Monitoring and anomaly detection tooling for live trading infrastructure.</p></div>
+              <span class="tag">Jun 2025 &mdash; Aug 2025</span></article>
+            <article class="row"><span class="idx">04</span><div>
+              <h4>Quantitative Research Intern</h4><p class="meta">Wren Asset Management</p>
+              <p class="d">Built research infrastructure and tested systematic strategies for an actively managed portfolio.</p></div>
+              <span class="tag">Jan 2025 &mdash; Apr 2025</span></article>
+            <article class="row"><span class="idx">05</span><div>
+              <h4>Software Engineer Intern</h4><p class="meta">Infio</p>
+              <p class="d">Software tooling for financial data in amortization tables.</p></div>
+              <span class="tag">Sep 2023 &mdash; May 2024</span></article>
+            <article class="row"><span class="idx">06</span><div>
+              <h4>IT Support Engineer Intern</h4><p class="meta">Najmee</p>
+              <p class="d">Supported clients, built documentation, and automated IT processes.</p></div>
+              <span class="tag">Jun 2023 &mdash; Aug 2023</span></article>
+          </div>
         </div>
       </section>
 
-      <section id="experience" class="section" aria-labelledby="experience-title">
-        <div class="section-heading">
-          <p class="section-kicker">Experience</p>
-          <h2 id="experience-title">Recent work across AI, research, and trading systems.</h2>
-        </div>
-        <div class="project-list experience-list">
-          <article class="project-card experience-card">
-            <span class="project-index">01</span>
-            <div>
-              <h3>AI Engineering Intern</h3>
-              <p class="role-meta">Octave · May 2026 - Present</p>
-              <p>Build ML systems for engineering simulations and production workflows.</p>
-            </div>
-          </article>
-          <article class="project-card experience-card">
-            <span class="project-index">02</span>
-            <div>
-              <h3>Researcher</h3>
-              <p class="role-meta">University of Michigan Department of Statistics · May 2025 - May 2026</p>
-              <p>Researched personalized LLM alignment methods for modeling user preferences at scale.</p>
-            </div>
-          </article>
-          <article class="project-card experience-card">
-            <span class="project-index">03</span>
-            <div>
-              <h3>Trading Support Intern</h3>
-              <p class="role-meta">Cantor Fitzgerald · Jun 2025 - Aug 2025</p>
-              <p>Worked on monitoring and anomaly detection tools for live trading infrastructure.</p>
-            </div>
-          </article>
-          <article class="project-card experience-card">
-            <span class="project-index">04</span>
-            <div>
-              <h3>Quantitative Research Intern</h3>
-              <p class="role-meta">Wren Asset Management · Jan 2025 - Apr 2025</p>
-              <p>Built research infrastructure and tested systematic strategies for an actively managed portfolio.</p>
-            </div>
-          </article>
-          <article class="project-card experience-card">
-            <span class="project-index">05</span>
-            <div>
-              <h3>Software Engineer Intern</h3>
-              <p class="role-meta">Infio · Sep 2023 - May 2024</p>
-              <p>Worked on software tooling for financial data in amortization tables.</p>
-            </div>
-          </article>
-          <article class="project-card experience-card">
-            <span class="project-index">06</span>
-            <div>
-              <h3>IT Support Engineer Intern</h3>
-              <p class="role-meta">Najmee · Jun 2023 - Aug 2023</p>
-              <p>Supported clients, built company documentation, and wrote automation scripts for IT processes.</p>
-            </div>
-          </article>
+      <section class="sec" id="competitions" data-piece="T" data-label="COMPETITIONS" data-tally="3 LINES" style="--c:var(--T)">
+        <div class="sec-h"><span class="pc" data-piece="T"></span><h3>COMPETITIONS</h3><span class="fill"></span><span class="n">3 LINES</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">01</span><div>
+              <h4><a href="https://github.com/alexyesilyurt/imc-prosperity-writeup">IMC Prosperity 4</a></h4>
+              <p class="d">26th in the U.S. and 83rd globally out of 18,803 teams in IMC's algorithmic trading competition.</p></div>
+              <span class="tag">Top 0.5%</span></article>
+            <article class="row"><span class="idx">02</span><div>
+              <h4><a href="https://github.com/alexyesilyurt/mig-conference-writeup">MIG Quant Trading Competition</a></h4>
+              <p class="d">1st of 34 teams across live trading, market making, and execution games.</p></div>
+              <span class="tag">1st Place</span></article>
+            <article class="row"><span class="idx">03</span><div>
+              <h4>Optiver FutureFocus Trading Bot</h4>
+              <p class="d">Built an algorithmic trading program as part of Optiver's FutureFocus program.</p></div>
+              <span class="tag">Trading Bot</span></article>
+          </div>
         </div>
       </section>
 
-      <section id="competitions" class="section" aria-labelledby="competitions-title">
-        <div class="section-heading">
-          <p class="section-kicker">Competitions</p>
-          <h2 id="competitions-title">Trading competitions and selected results.</h2>
+
+      <section class="sec" id="programs" data-piece="J" data-label="PROGRAMS" data-tally="9 LINES" style="--c:var(--J)">
+        <div class="sec-h"><span class="pc" data-piece="J"></span><h3>PROGRAMS</h3><span class="fill"></span><span class="n">9 LINES</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">01</span><div>
+              <h4><a href="https://www.optiver.com/">Optiver</a> FutureFocus</h4>
+              <p class="d">Quantitative trading program on markets, strategy, and trading simulations.</p></div>
+              <span class="tag">Mar 2026</span></article>
+            <article class="row"><span class="idx">02</span><div>
+              <h4><a href="https://www.janestreet.com/">Jane Street Capital</a> FOCUS</h4>
+              <p class="d">Program for students exploring quantitative finance and technical problem-solving.</p></div>
+              <span class="tag">May 2025</span></article>
+            <article class="row"><span class="idx">03</span><div>
+              <h4><a href="https://www.goldmansachs.com/">Goldman Sachs</a> Virtual Insight Series</h4>
+              <p class="d">Virtual insight program covering finance, markets, and professional development.</p></div>
+              <span class="tag">Jun 2025</span></article>
+            <article class="row"><span class="idx">04</span><div>
+              <h4><a href="https://www.deshaw.com/">D. E. Shaw</a> Connect</h4>
+              <p class="d">Program introducing students to finance, technology, and investing.</p></div>
+              <span class="tag">Sep 2025</span></article>
+            <article class="row"><span class="idx">05</span><div>
+              <h4><a href="https://walleyecapital.com/">Walleye</a> Sophomore Summer Summit</h4>
+              <p class="d">Sophomore program focused on trading, markets, and firm exposure.</p></div>
+              <span class="tag">Jul 2025</span></article>
+            <article class="row"><span class="idx">06</span><div>
+              <h4><a href="https://sig.com/">Susquehanna</a> Discovery Day</h4>
+              <p class="d">Discovery program introducing trading, strategy, and market-making.</p></div>
+              <span class="tag">Feb 2025</span></article>
+            <article class="row"><span class="idx">07</span><div>
+              <h4><a href="https://www.citigroup.com/global">Citi</a> Freshman Discovery Program</h4>
+              <p class="d">Early-career program exploring finance, markets, and professional pathways.</p></div>
+              <span class="tag">Jun 2025</span></article>
+            <article class="row"><span class="idx">08</span><div>
+              <h4><a href="https://tech.seo-usa.org/">SEO</a> Tech Developer Program</h4>
+              <p class="d">Technical program supporting software engineering development.</p></div>
+              <span class="tag">Selected</span></article>
+            <article class="row"><span class="idx">09</span><div>
+              <h4><a href="https://www.colorstack.org/">ColorStack</a></h4>
+              <p class="d">Community for computer science students and technologists.</p></div>
+              <span class="tag">Member</span></article>
+          </div>
         </div>
-        <div class="project-list">
-          <article class="project-card">
-            <span class="project-index">01</span>
-            <div>
-              <h3>
-                <a class="title-link" href="https://github.com/alexyesilyurt/imc-prosperity-writeup">IMC Prosperity 4</a>
-              </h3>
-              <p>Placed 26th in the U.S. and 83rd globally out of 18,803 teams in IMC's algorithmic trading competition.</p>
-            </div>
-            <span class="project-tag">Top 0.5%</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">02</span>
-            <div>
-              <h3>
-                <a class="title-link" href="https://github.com/alexyesilyurt/mig-conference-writeup">MIG Quant Trading Competition</a>
-              </h3>
-              <p>Placed 1st of 34 teams in a week-long competition spanning live trading, market making, and execution games.</p>
-            </div>
-            <span class="project-tag">1st Place</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">03</span>
-            <div>
-              <h3>Optiver FutureFocus Trading Bot</h3>
-              <p>Built an algorithmic trading program as part of Optiver's FutureFocus program.</p>
-            </div>
-            <span class="project-tag">Trading Bot</span>
-          </article>
-          <article class="project-card muted-card">
-            <span class="project-index">04</span>
-            <div>
-              <h3>Prediction Markets</h3>
-              <p>Coming soon. Stay tuned.</p>
-            </div>
-            <span class="project-tag">Soon</span>
-          </article>
+      </section>
+      <section class="sec" id="projects" data-piece="L" data-label="PROJECTS" data-tally="4 LINES" style="--c:var(--L)">
+        <div class="sec-h"><span class="pc" data-piece="L"></span><h3>PROJECTS</h3><span class="fill"></span><span class="n">4 LINES</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">01</span><div>
+              <h4><a href="https://github.com/alexyesilyurt/hft-order-book">HFT Order Book</a></h4>
+              <p class="d">High-performance order book for market data and matching engine experimentation.</p></div>
+              <span class="tag">C++</span></article>
+            <article class="row"><span class="idx">02</span><div>
+              <h4><a href="https://github.com/alexyesilyurt/black-scholes-model-mfams">Black-Scholes Model</a></h4>
+              <p class="d">Options pricing tooling built for MFAMS markets education.</p></div>
+              <span class="tag">Python</span></article>
+            <article class="row"><span class="idx">03</span><div>
+              <h4><a href="https://github.com/alexyesilyurt/personal-site">This Site</a></h4>
+              <p class="d">A personal site shaped like a Tetris well. Hand-built, no framework, no dependencies.</p></div>
+              <span class="tag">Web</span></article>
+            <article class="row soon"><span class="idx">04</span><div>
+              <h4>Prediction Markets</h4><p class="d">Coming soon. Stay tuned.</p></div>
+              <span class="tag">Queued</span></article>
+          </div>
         </div>
       </section>
 
-      <section id="projects" class="section" aria-labelledby="projects-title">
-        <div class="section-heading">
-          <p class="section-kicker">Projects</p>
-          <h2 id="projects-title">Open-source builds and technical work.</h2>
-        </div>
-        <div class="project-list">
-          <article class="project-card">
-            <span class="project-index">01</span>
-            <div>
-              <h3>
-                <a class="title-link" href="https://github.com/alexyesilyurt/hft-order-book">HFT Order Book</a>
-              </h3>
-              <p>Built a high-performance order book implementation for market data and matching engine experimentation.</p>
-            </div>
-            <span class="project-tag">C++</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">02</span>
-            <div>
-              <h3>
-                <a class="title-link" href="https://github.com/alexyesilyurt/black-scholes-model-mfams">Black-Scholes Model</a>
-              </h3>
-              <p>Implemented options pricing tooling for Michigan Finance and Mathematics Society education.</p>
-            </div>
-            <span class="project-tag">Python</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">03</span>
-            <div>
-              <h3>
-                <a class="title-link" href="https://github.com/alexyesilyurt/personal-site">Personal Site</a>
-              </h3>
-              <p>Designed and built this minimalist personal website as a public home for work, projects, and links.</p>
-            </div>
-            <span class="project-tag">Web</span>
-          </article>
+      <section class="sec" id="leadership" data-piece="S" data-label="LEADERSHIP" data-tally="1 LINE" style="--c:var(--S)">
+        <div class="sec-h"><span class="pc" data-piece="S"></span><h3>LEADERSHIP</h3><span class="fill"></span><span class="n">1 LINE</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">01</span><div>
+              <h4><a href="https://mfams-umich.com/">President</a></h4>
+              <p class="meta">Michigan Finance and Mathematics Society</p>
+              <p class="d">Lead a student organization focused on quantitative finance, markets education, and technical finance projects.</p></div>
+              <span class="tag">MFAMS</span></article>
+          </div>
         </div>
       </section>
 
-      <section id="programs" class="section" aria-labelledby="programs-title">
-        <div class="section-heading">
-          <p class="section-kicker">Programs</p>
-          <h2 id="programs-title">Selected participant in technical and finance programs.</h2>
-        </div>
-        <div class="project-list">
-          <article class="project-card">
-            <span class="project-index">01</span>
-            <div>
-              <h3><a class="title-link" href="https://www.optiver.com/">Optiver</a> FutureFocus</h3>
-              <p>Participated in Optiver's quantitative trading program focused on markets, strategy, and trading simulations.</p>
-            </div>
-            <span class="project-tag">Mar 2026</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">02</span>
-            <div>
-              <h3><a class="title-link" href="https://www.janestreet.com/">Jane Street Capital</a> FOCUS</h3>
-              <p>Selected for Jane Street's program for students exploring quantitative finance and technical problem-solving.</p>
-            </div>
-            <span class="project-tag">May 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">03</span>
-            <div>
-              <h3><a class="title-link" href="https://www.goldmansachs.com/">Goldman Sachs</a> Virtual Insight Series</h3>
-              <p>Selected for Goldman's virtual insight program covering finance, markets, and professional development.</p>
-            </div>
-            <span class="project-tag">Jun 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">04</span>
-            <div>
-              <h3><a class="title-link" href="https://www.deshaw.com/">D. E. Shaw</a> Connect</h3>
-              <p>Selected for D. E. Shaw's program introducing students to finance, technology, and investing.</p>
-            </div>
-            <span class="project-tag">Sep 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">05</span>
-            <div>
-              <h3><a class="title-link" href="https://walleyecapital.com/">Walleye</a> Sophomore Summer Summit</h3>
-              <p>Selected for Walleye's sophomore program focused on trading, markets, and firm exposure.</p>
-            </div>
-            <span class="project-tag">Jul 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">06</span>
-            <div>
-              <h3><a class="title-link" href="https://sig.com/">Susquehanna International Group</a> Discovery Day</h3>
-              <p>Selected for SIG's discovery program introducing students to trading, strategy, and market-making.</p>
-            </div>
-            <span class="project-tag">Feb 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">07</span>
-            <div>
-              <h3><a class="title-link" href="https://www.citigroup.com/global">Citi</a> Freshman Discovery Program</h3>
-              <p>Selected for Citi's early-career program exploring finance, markets, and professional pathways.</p>
-            </div>
-            <span class="project-tag">Jun 2025</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">08</span>
-            <div>
-              <h3><a class="title-link" href="https://tech.seo-usa.org/">SEO</a> Tech Developer Program</h3>
-              <p>Selected for SEO's technical program supporting software engineering development and industry preparation.</p>
-            </div>
-            <span class="project-tag">Selected</span>
-          </article>
-          <article class="project-card">
-            <span class="project-index">09</span>
-            <div>
-              <h3><a class="title-link" href="https://www.colorstack.org/">ColorStack</a></h3>
-              <p>Member of ColorStack's community for computer science students and technologists.</p>
-            </div>
-            <span class="project-tag">Member</span>
-          </article>
+      <section class="sec" id="additional" data-piece="Z" data-label="ADDITIONAL" data-tally="5 LINES" style="--c:var(--Z)">
+        <div class="sec-h"><span class="pc" data-piece="Z"></span><h3>ADDITIONAL</h3><span class="fill"></span><span class="n">5 LINES</span></div>
+        <div class="sec-content">
+          <div class="grid">
+            <article class="tile" data-game="1" style="--c:var(--I)">
+              <div class="body"><span class="kicker">TETRIS</span>
+                <div class="art board" data-art="tetris" aria-hidden="true"></div>
+                <h4>Top 5% in the U.S.</h4>
+                <p>I played competitively. The stack never really leaves you.</p>
+                <span class="go">&#9654; PLAY MY BOARD</span></div></article>
+            <article class="tile" style="--c:var(--S)">
+              <div class="body"><span class="kicker">OUTDOORS</span>
+                <div class="art" data-art="trail" aria-hidden="true"></div>
+                <h4>New Jersey trails</h4>
+                <p>Always looking for somewhere new to hike.</p></div></article>
+            <article class="tile" style="--c:var(--L)">
+              <div class="body"><span class="kicker">TRAVEL</span>
+                <div class="art" data-art="plane" aria-hidden="true"></div>
+                <h4>Places and food</h4>
+                <p>Will almost always say yes to Mediterranean.</p></div></article>
+            <article class="tile" style="--c:var(--T)">
+              <div class="body"><span class="kicker">TRAINING</span>
+                <div class="art" data-art="lift" aria-hidden="true"></div>
+                <h4>Weightlifting</h4>
+                <p>My favorite way to reset after long stretches of work.</p></div></article>
+            <article class="tile" style="--c:var(--O)">
+              <div class="body"><span class="kicker">HOME</span>
+                <div class="art" data-art="cat" aria-hidden="true"></div>
+                <h4>Gigi</h4>
+                <p>My cat. Probably deserves her own section.</p></div></article>
+          </div>
         </div>
       </section>
 
-      <section id="leadership" class="section" aria-labelledby="leadership-title">
-        <div class="section-heading">
-          <p class="section-kicker">Leadership</p>
-          <h2 id="leadership-title">Campus leadership at the intersection of finance and math.</h2>
-        </div>
-        <div class="project-list">
-          <article class="project-card">
-            <span class="project-index">01</span>
-            <div>
-              <h3><a class="title-link" href="https://mfams-umich.com/">President</a></h3>
-              <p class="role-meta">Michigan Finance and Mathematics Society</p>
-              <p>Lead a student organization focused on quantitative finance, markets education, and technical finance projects.</p>
-            </div>
-            <span class="project-tag">MFAMS</span>
-          </article>
+      <section class="sec" id="contact" data-piece="O" data-label="CONTACT" data-tally="OPEN" style="--c:var(--O)">
+        <div class="sec-h"><span class="pc" data-piece="O"></span><h3>CONTACT</h3><span class="fill"></span><span class="n">OPEN</span></div>
+        <div class="sec-content">
+          <div class="rows">
+            <article class="row"><span class="idx">&#9993;</span><div><h4><a href="mailto:alexyes@umich.edu">alexyes@umich.edu</a></h4>
+              <p class="d">Best way to reach me.</p></div><span class="tag">Email</span></article>
+            <article class="row"><span class="idx">in</span><div><h4><a href="https://www.linkedin.com/in/alexyesilyurt/">linkedin.com/in/alexyesilyurt</a></h4>
+              <p class="d">Work history and background.</p></div><span class="tag">LinkedIn</span></article>
+            <article class="row"><span class="idx">&lt;/&gt;</span><div><h4><a href="https://github.com/alexyesilyurt">github.com/alexyesilyurt</a></h4>
+              <p class="d">Code, writeups, and this site.</p></div><span class="tag">GitHub</span></article>
+          </div>
         </div>
       </section>
 
-      <section id="outside" class="section" aria-labelledby="outside-title">
-        <div class="section-heading">
-          <p class="section-kicker">Outside work</p>
-          <h2 id="outside-title">A few things that keep me curious.</h2>
-        </div>
-        <div class="personal-grid">
-          <article class="flip-card" tabindex="0">
-            <div class="flip-card-inner">
-              <div class="flip-card-face flip-card-front">
-                <span>Tetris</span>
-                <h3>Competitive puzzle brain</h3>
-                <p>I used to play Tetris competitively and reached the top 5% in the U.S.</p>
-              </div>
-              <div class="flip-card-face flip-card-back">
-                <img src="assets/outside-tetris.svg" alt="A colorful Tetris game board." />
-              </div>
-            </div>
-          </article>
-          <article class="flip-card" tabindex="0">
-            <div class="flip-card-inner">
-              <div class="flip-card-face flip-card-front">
-                <span>Outdoors</span>
-                <h3>New Jersey trails</h3>
-                <p>I like hiking around New Jersey and am always looking for new places to explore.</p>
-              </div>
-              <div class="flip-card-face flip-card-back">
-                <img src="assets/outside-hiking.jpg" alt="A river overlook from a hiking trail." />
-              </div>
-            </div>
-          </article>
-          <article class="flip-card" tabindex="0">
-            <div class="flip-card-inner">
-              <div class="flip-card-face flip-card-front">
-                <span>Travel</span>
-                <h3>Places and food</h3>
-                <p>I love traveling, trying new food, and will almost always say yes to Mediterranean.</p>
-              </div>
-              <div class="flip-card-face flip-card-back">
-                <img src="assets/outside-travel.jpg" alt="A street view in Quebec with stone buildings and cloudy sky." />
-              </div>
-            </div>
-          </article>
-          <article class="flip-card" tabindex="0">
-            <div class="flip-card-inner">
-              <div class="flip-card-face flip-card-front">
-                <span>Training</span>
-                <h3>Weightlifting</h3>
-                <p>Lifting is one of my favorite ways to reset after long stretches of work.</p>
-              </div>
-              <div class="flip-card-face flip-card-back">
-                <img src="assets/outside-training.jpg" alt="Treadmills facing a bright ocean view." />
-              </div>
-            </div>
-          </article>
-          <article class="flip-card" tabindex="0">
-            <div class="flip-card-inner">
-              <div class="flip-card-face flip-card-front">
-                <span>Home</span>
-                <h3>Gigi</h3>
-                <p>I have a cat named Gigi, who probably deserves her own section eventually.</p>
-              </div>
-              <div class="flip-card-face flip-card-back">
-                <img src="assets/outside-gigi.jpg" alt="Gigi the cat sitting among flowers." />
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
+      <footer class="foot">
+        <span>Alex Yesilyurt &mdash; alexyesilyurt.dev</span>
+        <nav><a href="mailto:alexyes@umich.edu">Email</a><a href="https://github.com/alexyesilyurt">GitHub</a>
+          <a href="https://www.linkedin.com/in/alexyesilyurt/">LinkedIn</a></nav>
+      </footer>
     </main>
 
-    <footer class="site-footer">
-      <span>Alex Yesilyurt</span>
-      <nav class="footer-links" aria-label="Footer links">
-        <a href="https://www.linkedin.com/in/alexyesilyurt/">LinkedIn</a>
-        <a href="https://github.com/alexyesilyurt">GitHub</a>
-        <a href="mailto:alexyes@umich.edu">Email</a>
-      </nav>
-    </footer>
+    <!-- ============ GAME ============ -->
+    <div id="game">
+      <button class="g-close" id="closeGame">ESC &times; CLOSE</button>
+      <div class="g-wrap">
+        <div class="g-side">
+          <div class="g-box g-hold"><h5>HOLD</h5><canvas id="holdC" width="76" height="56"></canvas></div>
+          <div class="g-box g-stats">
+            <div class="g-stat"><i>SCORE</i><b id="gScore">0</b></div>
+            <div class="g-stat"><i>LINES</i><b id="gLines">0</b></div>
+            <div class="g-stat"><i>LEVEL</i><b id="gLevel">1</b></div>
+            <div class="g-stat"><i>BEST</i><b id="gBest">0</b></div>
+          </div>
+          <div class="g-box g-keys"><b>&#8592; &#8594;</b> move<br><b>&#8593;/X</b> rotate<br><b>Z</b> rotate ccw<br>
+            <b>&#8595;</b> soft drop<br><b>SPACE</b> hard drop<br><b>C</b> hold<br><b>P</b> pause</div>
+        </div>
+        <div class="g-board-wrap">
+          <canvas id="gboard"></canvas>
+          <div class="g-over" id="gOver"><div><h4 id="gOverT">GAME OVER</h4><p id="gOverP"></p>
+            <button class="press" id="retry"><span class="caret">&#9654;</span> RETRY</button></div></div>
+        </div>
+        <div class="g-side g-side-next"><div class="g-box g-next"><h5>NEXT</h5><canvas id="nextC" width="76" height="210"></canvas></div></div>
+      </div>
+      <div class="g-touch" id="gTouch">
+        <button data-k="ArrowLeft" aria-label="Move left">&#9664;</button>
+        <button data-k="rotate" aria-label="Rotate">&#8635;</button>
+        <button data-k="ArrowRight" aria-label="Move right">&#9654;</button>
+        <button data-k="ArrowDown" aria-label="Soft drop">&#9660;</button>
+        <button data-k="drop" aria-label="Hard drop">&#10515;</button>
+        <button data-k="hold" aria-label="Hold piece">H</button>
+      </div>
+    </div>
   </body>
 </html>

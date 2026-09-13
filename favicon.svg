@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="10" fill="#050505"/>
-  <text
-    x="50%"
-    y="52%"
-    fill="#ffffff"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="24"
-    font-weight="800"
-    text-anchor="middle"
-    dominant-baseline="middle"
-  >AY</text>
+  <rect width="64" height="64" rx="10" fill="#07080B"/>
+  <g shape-rendering="crispEdges">
+    <rect x="10" y="10" width="22" height="22" fill="#2BD9E4"/>
+    <rect x="32" y="10" width="22" height="22" fill="#B44BE0"/>
+    <rect x="10" y="32" width="22" height="22" fill="#F5952B"/>
+    <rect x="32" y="32" width="22" height="22" fill="#F5D51F"/>
+    <path d="M10 10h22v3H13v19h-3z" fill="#ffffff" opacity=".34"/>
+    <path d="M32 10h22v3H35v19h-3z" fill="#ffffff" opacity=".34"/>
+    <path d="M10 32h22v3H13v19h-3z" fill="#ffffff" opacity=".34"/>
+    <path d="M32 32h22v3H35v19h-3z" fill="#ffffff" opacity=".34"/>
+  </g>
 </svg>
